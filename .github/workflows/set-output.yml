@@ -14,10 +14,16 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 12
-          
+      
+      # set-output Truncates Multiline Strings. Docs: https://trstringer.com/github-actions-multiline-strings/
       - name: Set output
         id: set-output
-        run: echo "::set-output name=log::$(npm i)"
+        run: |
+          MY_LOG=$(npm i)
+          MY_LOG="${MY_LOG//'%'/'%25'}"
+          MY_LOG="${MY_LOG//$'\n'/'%0A'}"
+          MY_LOG="${MY_LOG//$'\r'/'%0D'}"
+          echo "::set-output name=log::$MY_LOG"
 
       - name: Get output
         run: echo ${{ steps.set-output.outputs.log }}
