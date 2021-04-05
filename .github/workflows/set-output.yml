@@ -17,7 +17,7 @@ jobs:
           
       - name: Set output
         id: set-output
-        run: echo "::set-output name=log::$(ls)"
+        run: echo "::set-output name=log::$(npm i)"
 
       - name: Get output
         run: echo ${{ steps.set-output.outputs.log }}
