@@ -15,28 +15,15 @@ jobs:
         with:
           node-version: 12
 
-      - name: create string
-        run: |
-          MY_STRING=$(cat << EOF
-          first line
-          second line
-          third line
-          EOF
-          )
-          MY_STRING="${MY_STRING//'%'/'%25'}"
-          MY_STRING="${MY_STRING//$'\n'/'%0A'}"
-          MY_STRING="${MY_STRING//$'\r'/'%0D'}"
-          echo "::set-output name=content::$MY_STRING"
-        id: my_string
-      - name: display string
-        run: |
-          echo "The string is: ${{ steps.my_string.outputs.content }}"
-
-      # set-output Truncates Multiline Strings. Docs: https://trstringer.com/github-actions-multiline-strings/
+      # set-output Truncates Multiline Strings. 
+      # Docs: 
+      # - https://trstringer.com/github-actions-multiline-strings/
+      # - https://github.com/actions/toolkit/issues/403
       - name: Set output
         id: set-output
         run: |
-          MY_LOG=$(npm i vue)
+          ls -l | tee output.log
+          MY_LOG=$(cat output.log)
           MY_LOG="${MY_LOG//'%'/'%25'}"
           MY_LOG="${MY_LOG//$'\n'/'%0A'}"
           MY_LOG="${MY_LOG//$'\r'/'%0D'}"
