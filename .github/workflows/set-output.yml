@@ -23,11 +23,11 @@ jobs:
         id: set-output
         run: |
           MY_LOG=$(ls -l)
+          echo "$MY_LOG"
           MY_LOG="${MY_LOG//'%'/'%25'}"
           MY_LOG="${MY_LOG//$'\n'/'%0A'}"
           MY_LOG="${MY_LOG//$'\r'/'%0D'}"
-          echo "::set-output name=log::$MY_LOG"
 
       - name: Verify output
-        run: |
-          echo ${{ contains(steps.set-output.outputs.log, 'package.json') }}
+        if: contains(steps.set-output.outputs.log, 'package.json')
+        run: echo ${{ contains(steps.set-output.outputs.log, 'package.json') }}
