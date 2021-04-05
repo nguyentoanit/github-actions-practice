@@ -22,12 +22,12 @@ jobs:
       - name: Set output
         id: set-output
         run: |
-          ls -l | tee output.log
-          MY_LOG=$(cat output.log)
+          MY_LOG=$(ls -l)
           MY_LOG="${MY_LOG//'%'/'%25'}"
           MY_LOG="${MY_LOG//$'\n'/'%0A'}"
           MY_LOG="${MY_LOG//$'\r'/'%0D'}"
           echo "::set-output name=log::$MY_LOG"
 
-      - name: Get output
-        run: echo ${{ steps.set-output.outputs.log }}
+      - name: Verify output
+        run: |
+          echo ${{ contains(steps.set-output.outputs.log, 'package.json') }}
