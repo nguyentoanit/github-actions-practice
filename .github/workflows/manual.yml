@@ -15,7 +15,12 @@ on:
         description: 'Person to greet'
         # Default value if no value is explicitly provided
         default: 'World'
-
+      lookbackHours:
+        description: Lookback Hours
+        required: true
+        default: "26"
+env:
+  LOOKBACK_HOURS: "26"
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
@@ -30,3 +35,6 @@ jobs:
       run: |
         echo "Hello ${{ github.event.inputs.name }}"
         echo ${{ github.event.inputs.name || github.event.inputs.name.default }}
+      env:
+        LOOKBACK_HOURS: ${{ github.event.inputs.lookbackHours }}
+        LOOKBACK_HOURS2: ${{ github.event.inputs.lookbackHours || env.LOOKBACK_HOURS }}
