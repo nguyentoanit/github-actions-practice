@@ -18,6 +18,6 @@ jobs:
 
     steps:
     - name: Log input
-        run: |
+        run:|
           echo ${{ github.event.inputs.input1 }}
           echo $INPUT_INPUT1
