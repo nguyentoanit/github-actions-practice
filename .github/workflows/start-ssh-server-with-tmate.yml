@@ -1,4 +1,4 @@
-name: Create SSH server
+name: Start SSH server with tmate
 on:
   workflow_dispatch:
 jobs:

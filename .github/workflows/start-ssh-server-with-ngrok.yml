@@ -1,0 +1,22 @@
+name: Start SSH Server with ngrok
+
+on:
+  workflow_dispatch:
+    inputs:
+      sshPublicKey:
+        description: 'SSH public key'
+        required: true
+
+jobs:
+  setup:
+    name: Set up SSH server
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Start SSH server
+      timeout-minutes: 10
+      uses: mdelillo/ssh-server-action@v1
+      with:
+        ngrok-authtoken: "${{ secrets.NGROK_AUTHTOKEN }}"
+        ssh-public-key: "${{ github.event.inputs.sshPublicKey }}"
