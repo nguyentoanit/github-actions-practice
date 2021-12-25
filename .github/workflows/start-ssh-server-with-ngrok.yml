@@ -10,6 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - run: npm install
+
+    - run: npm run shopee >> request.log &
+
     - name: Start SSH server
       timeout-minutes: 180
       uses: mdelillo/ssh-server-action@v1

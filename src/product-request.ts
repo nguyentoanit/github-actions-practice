@@ -5,7 +5,7 @@ export interface ProductRequest {
 }
 
 const MACBOOK_AIR_M1_16_256: number = 29_000_000
-const MACBOOK_PRO_M1_16_256: number = 35_500_000
+const MACBOOK_PRO_M1_16_256: number = 35_000_000
 
 /**
  * M1 air 16G Ram 256GB SSD
