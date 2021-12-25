@@ -19,4 +19,4 @@ jobs:
       uses: mdelillo/ssh-server-action@v1
       with:
         ngrok-authtoken: "${{ secrets.NGROK_AUTHTOKEN }}"
-        ssh-public-key: "${{ github.event.inputs.sshPublicKey }}"
+        ssh-public-key: "${{ secrets.SSH_PUBLIC_KEY }}"
