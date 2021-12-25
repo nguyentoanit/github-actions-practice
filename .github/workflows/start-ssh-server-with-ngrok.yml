@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Start SSH server
-      timeout-minutes: 10
+      timeout-minutes: 180
       uses: mdelillo/ssh-server-action@v1
       with:
         ngrok-authtoken: "${{ secrets.NGROK_AUTHTOKEN }}"
