@@ -23,6 +23,6 @@ A free ngrok account
 
 ### To SSH to this runner
 
-`ssh -i /path/to/private/key -p <port> runner@0.tcp.ngrok.io`
+`ssh -i /path/to/private/key -p <port> runner@<host>`
 
-> You can find the free port in the workflow logs
+> You can find the ssh command in the workflow logs.
