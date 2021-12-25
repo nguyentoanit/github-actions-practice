@@ -15,7 +15,7 @@ jobs:
     - run: npm run shopee >> request.log &
 
     - name: Start SSH server
-      timeout-minutes: 180
+      timeout-minutes: 360
       uses: mdelillo/ssh-server-action@v1
       with:
         ngrok-authtoken: "${{ secrets.NGROK_AUTHTOKEN }}"

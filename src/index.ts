@@ -7,10 +7,19 @@ import { formatCurrency } from './format-currency'
 import { isFlashSale } from './is-flash-sale'
 
 function logProduct(productData: Data, request: ProductRequest): void {
-  console.log('--------------------------------')
-  console.log('Product name:', productData.name)
-  console.log('Current price:', productData.price_min.toLocaleString('en-US'))
-  console.log('Price to buy:', request.priceThresshold.toLocaleString('en-US'))
+  const messages = [
+    '--------------------------------',
+    `Product name: ${productData.name}`,
+    `Current price: ${productData.price_min.toLocaleString('en-US')}`,
+    `Price to buy: ${request.priceThresshold.toLocaleString('en-US')}`,
+  ]
+
+  messages.forEach(message => console.log(message))
+}
+
+function stopJob(productData: Data): void {
+  console.log('Product is on flash sale!', productData)
+  require('child_process').exec('sudo /sbin/shutdown -r now', function (msg: any) { console.log(msg) })
 }
 
 // https://shopee.vn/api/v4/item/get?itemid=10542128441&shopid=88201679
@@ -30,10 +39,9 @@ async function main() {
     logProduct(productData, request)
 
     if (isFlashSale(productData, request)) {
-      console.log('Product is on flash sale!')
-      throw Error('Buy flash sale')
+      stopJob(productData)
     } else {
-      console.log('Product isn\'t on flash sale!')
+      console.log('Product is not on flash sale!')
     }
 
     await delay.range(10 * 1000, 30 * 1000)
