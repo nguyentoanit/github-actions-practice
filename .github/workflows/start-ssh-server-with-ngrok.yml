@@ -2,10 +2,6 @@ name: Start SSH Server with ngrok
 
 on:
   workflow_dispatch:
-    inputs:
-      sshPublicKey:
-        description: 'SSH public key'
-        required: true
 
 jobs:
   setup:
